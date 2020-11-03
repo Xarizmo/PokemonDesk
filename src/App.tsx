@@ -1,13 +1,12 @@
 import React from "react";
 import cn from "classnames";
 
-import "./custom.css";
-import s from "./App.modules.scss";
+import s from "./App.module.scss";
 
 export const App = () => {
   return (
     <div className={cn(s.header, "color")}>
-      This is App component! Hello matherfucke*s!!
+      This is App component! Hello world!!!
     </div>
   );
 };

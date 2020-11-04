@@ -1,3 +1,10 @@
-.header {
-    font-size: 64px;
+.app {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 100vh;
+}
+
+.main {
+  font-size: 40px;
 }

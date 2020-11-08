@@ -1,0 +1,23 @@
+import React from 'react';
+import Header from '../../components/Header/Header';
+import Button from '../../components/Button';
+import Parallax from '../../components/Parallax';
+import Layout from '../../components/Layout';
+
+import s from './Home.module.scss';
+
+const HomePage = () => {
+  return (
+    <div className={s.root}>
+      <Header />
+      <Layout>
+        <Button onClick={() => {}}>See pokemons</Button>
+        <div>
+          <Parallax />
+        </div>
+      </Layout>
+    </div>
+  );
+};
+
+export default HomePage;

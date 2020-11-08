@@ -1,18 +1,51 @@
 import React from 'react';
 
 import s from './Header.module.scss';
-import PokemonLogo from '../../assets/logo.svg';
+// import PokemonLogo from './assets/logo.svg';
+import { ReactComponent as PokemonLogoSvg } from './assets/logo.svg';
+
+interface IMenu {
+  id: number;
+  value: string;
+  link: string;
+}
+
+const MENU: IMenu[] = [
+  {
+    id: 1,
+    value: 'Home',
+    link: '#',
+  },
+  {
+    id: 2,
+    value: 'Pokédex',
+    link: '#',
+  },
+  {
+    id: 3,
+    value: 'Legendaries',
+    link: '#',
+  },
+  {
+    id: 4,
+    value: 'Documentation',
+    link: '#',
+  },
+];
 
 const Header = () => {
   return (
-    <div className={s.header}>
-      <div className={s.wrapper}>
-        <PokemonLogo />
-        <div className={s.nav}>
-          <h3 className={s.active}>Home</h3>
-          <h3>Pokédex</h3>
-          <h3>Legendaries</h3>
-          <h3>Documentation</h3>
+    <div className={s.root}>
+      <div className={s.wrap}>
+        <div className="pokemonLogo">
+          <PokemonLogoSvg />
+        </div>
+        <div className="menuWrap">
+          {MENU.map(({ value, link, id }) => (
+            <a key={id} href={link} className={s.menuLink}>
+              {value}
+            </a>
+          ))}
         </div>
       </div>
     </div>

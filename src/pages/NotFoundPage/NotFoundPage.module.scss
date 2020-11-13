@@ -1,0 +1,22 @@
+@import '../../variables';
+
+.root {
+  min-height: 100vh;
+  background: $danger;
+}
+
+.wrap {
+  color: inherit;
+}
+
+.text {
+  color: inherit;
+}
+
+.layer {
+  color: inherit;
+}
+
+.subTitle > span {
+  color: $white;
+}

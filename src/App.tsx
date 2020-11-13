@@ -1,16 +1,19 @@
 import React from 'react';
-
-import s from './App.module.scss';
+import { useRoutes } from 'hookrouter';
+import routes from './routes';
+import NotFoundPage from './pages/NotFoundPage';
 import Header from './components/Header/Header';
-import Footer from './components/Footer/Footer';
 
 const App = () => {
-  return (
-    <div className={s.app}>
+  const match = useRoutes(routes);
+
+  return match ? (
+    <>
       <Header />
-      <div className={s.main}>Main content</div>
-      <Footer />
-    </div>
+      {match}
+    </>
+  ) : (
+    <NotFoundPage />
   );
 };
 

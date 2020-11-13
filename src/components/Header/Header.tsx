@@ -1,22 +1,35 @@
 import React from 'react';
+import { A, usePath } from 'hookrouter';
+import cn from 'classnames';
 
 import s from './Header.module.scss';
-import PokemonLogo from '../../assets/logo.svg';
+import { ReactComponent as PokemonLogoSvg } from './assets/logo.svg';
+import { GENERAL_MENU } from '../../routes';
 
 const Header = () => {
+  const path = usePath();
+
   return (
-    <div className={s.header}>
-      <div className={s.wrapper}>
-        <PokemonLogo />
-        <div className={s.nav}>
-          <h3 className={s.active}>Home</h3>
-          <h3>Pokédex</h3>
-          <h3>Legendaries</h3>
-          <h3>Documentation</h3>
+    <div className={s.root}>
+      <div className={s.wrap}>
+        <div className={s.pokemonLogo}>
+          <PokemonLogoSvg />
+        </div>
+        <div className={s.menuWrap}>
+          {GENERAL_MENU.map(({ title, link }) => (
+            <A
+              key={title}
+              href={link}
+              className={cn(s.menuLink, {
+                [s.activeLink]: link === path,
+              })}>
+              {title}
+            </A>
+          ))}
         </div>
       </div>
     </div>
   );
 };
 
-export default Header;
+export default React.memo(Header);

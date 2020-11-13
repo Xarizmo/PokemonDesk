@@ -1,18 +1,18 @@
 import React from 'react';
-import Header from '../../components/Header/Header';
+import { navigate } from 'hookrouter';
 import Button from '../../components/Button';
 import Parallax from '../../components/Parallax';
-import Layout from '../../components/Layout';
 
+import Layout from '../../components/Layout';
 import s from './Home.module.scss';
 import Heading from '../../components/Heading';
+import { LinkEnum } from '../../routes';
 
 const HomePage = () => {
   return (
     <div className={s.root}>
-      <Header />
       <Layout>
-        <Button onClick={() => {}} small>
+        <Button onClick={() => navigate(LinkEnum.POKEDEX)} small>
           See pokemons
         </Button>
         <Heading type="h2">Main Header!</Heading>

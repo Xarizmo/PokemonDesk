@@ -5,6 +5,7 @@ import Button from '../../components/Button';
 import s from './NotFoundPage.module.scss';
 
 import TeamRocket from './assets/Team_Rocket_trio.png';
+import { LinkEnum } from '../../routes';
 
 const NotFoundPage = () => {
   return (
@@ -16,7 +17,7 @@ const NotFoundPage = () => {
           <div className={s.subTitle}>
             <span>The rocket team</span> has won this time.
           </div>
-          <Button yellow onClick={() => navigate('/')}>
+          <Button yellow onClick={() => navigate(LinkEnum.HOME)}>
             Return
           </Button>
         </div>

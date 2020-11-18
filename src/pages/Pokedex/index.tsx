@@ -1,67 +1,54 @@
-import React, { useEffect, useState } from 'react';
-import PokemonCard from '../../components/PokemonCard';
+import React, { useState } from 'react';
+import useData from '../../hook/getData';
 
 import s from './Pokedex.module.scss';
+import PokemonCard from '../../components/PokemonCard';
 import Heading from '../../components/Heading';
 
-const usePokemons = () => {
-  const [data, setData] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [isError, setIsError] = useState(false);
-
-  useEffect(() => {
-    const getPokemons = async () => {
-      setIsLoading(true);
-      try {
-        const response = await fetch('http://zar.hosthot.ru/api/v1/pokemons');
-        const result = await response.json();
-
-        setData(result);
-      } catch (e) {
-        setIsError(true);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-    getPokemons();
-  }, []);
-
-  return {
-    data,
-    isLoading,
-    isError,
-  };
-};
-
 const Pokedex = () => {
-  const { data, isLoading, isError } = usePokemons();
+  const [searchValue, setSearchValue] = useState('');
+  const [query, setQuery] = useState({});
+
+  const { data, isLoading, isError } = useData('getPokemons', query, [searchValue]);
+
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchValue(e.target.value);
+    setQuery((i) => ({
+      ...i,
+      name: e.target.value,
+    }));
+  };
 
   if (isLoading) {
     return <div>Loading...</div>;
   }
 
   if (isError) {
-    return <div>Smth wrong!</div>;
+    return <div>Something wrong!</div>;
   }
 
   return (
     <>
       <div className={s.root}>
         <Heading type="h1">
-          {data.total} <b>Pokemons</b> for you to choose your favorite
+          {!isLoading && data.total} <b>Pokemons</b> for you to choose your favorite
         </Heading>
+        <div>
+          <input type="text" value={searchValue} onChange={handleSearchChange} />
+        </div>
         <div className={s.pokemonsWrap}>
-          {data.pokemons.map((item) => {
-            const {
-              id,
-              name,
-              stats: { attack, defense },
-              types,
-              img,
-            } = item;
+          {!isLoading &&
+            data.pokemons.map((item) => {
+              const {
+                id,
+                name,
+                stats: { attack, defense },
+                types,
+                img,
+              } = item;
 
-            return <PokemonCard key={id} name={name} attack={attack} defense={defense} types={types} img={img} />;
-          })}
+              return <PokemonCard key={id} name={name} attack={attack} defense={defense} types={types} img={img} />;
+            })}
         </div>
       </div>
     </>
